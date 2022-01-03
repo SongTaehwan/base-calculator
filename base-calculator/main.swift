@@ -7,4 +7,5 @@
 
 import Foundation
 
-print(fullAdder(true, true, true))
+//print(byteAdder([true, true, false, true, true, false, true, false], [true, false, true, true, false, false, true, true]))
+print(byteAdder([true, true, false, false, true, false, true, false], [true, true, false, true, true, false, false, true]))

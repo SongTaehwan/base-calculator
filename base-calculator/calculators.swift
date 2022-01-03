@@ -28,3 +28,24 @@ func fullAdder(_ bitA: Bool, _ bitB: Bool, _ cIn: Bool) -> [Bool] {
     
     return [cOut, sum]
 }
+
+func byteAdder(_ byteA: [Bool], _ byteB: [Bool]) -> [Bool] {
+    guard byteA.count == byteB.count else { return [] }
+    
+    var binary = [Bool]()
+    var carry = false
+    
+    for i in 0..<byteB.count {
+        let bitA = byteA[i]
+        let bitB = byteB[i]
+        let result = fullAdder(bitA, bitB, carry)
+        let sum = result.last!
+
+        carry = result.first!
+        binary.append(sum)
+    }
+
+    binary.append(carry)
+
+    return binary
+}
