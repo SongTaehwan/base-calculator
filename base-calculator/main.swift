@@ -7,3 +7,4 @@
 
 import Foundation
 
+print(fullAdder(true, true, true))
