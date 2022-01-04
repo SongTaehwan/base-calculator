@@ -9,20 +9,26 @@ import XCTest
 @testable import base_calculator
 
 class BaseCalculatorTest: XCTestCase {
-
-    override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+    func testDecimalToBinaryConversion() {
+        print("Testing convertDecimalToBinary")
+        XCTAssertEqual(convertDecimalToBinary(12), [false, false, true, true], "12 should be converted into 1100")
+        XCTAssertEqual(convertDecimalToBinary(10), [false, true, false, true], "10 should be converted into 1010")
+        XCTAssertEqual(convertDecimalToBinary(5), [true, false, true], "5 should be converted into 0101")
+        XCTAssertEqual(convertDecimalToBinary(173), [true, false, true, true, false, true , false, true], "173 should be converted into 10101101")
     }
-
-    override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
+    
+    func testBianryToDecimalConversion() {
+        print("Testing convertBinaryToDecimal")
+        XCTAssertEqual(convertBinaryToDecimal([false, true, true, true]), 14, "1110 should be converted into 14")
+        XCTAssertEqual(convertBinaryToDecimal([false, false, true, true]), 12, "1100 should be converted into 12")
+        XCTAssertEqual(convertBinaryToDecimal([false, false, false, true]), 8, "1000 should be converted into 8")
+        XCTAssertEqual(convertBinaryToDecimal([true, false, true, false]), 5, "0101 should be converted into 5")
     }
-
-    func testPerformanceExample() throws {
-        // This is an example of a performance test case.
-        measure {
-            // Put the code you want to measure the time of here.
-        }
+    
+    func testDecimalToHexadecimalConversion() {
+        print("Testing convertDecimalToHexadecimal")
+        XCTAssertEqual(convertDecimalToHexadecimal(8, 2), ["A"], "10 should be converted into 'A'")
+        XCTAssertEqual(convertDecimalToHexadecimal(10, 173), ["7", "B"], "183 should be converted into 'B7'")
+        XCTAssertEqual(convertDecimalToHexadecimal(1000, 234), ["2", "D", "4"], "1234 should be converted into '4D2'")
     }
-
 }
