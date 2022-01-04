@@ -19,25 +19,24 @@ func halfAdder(_ bitA: Bool, _ bitB: Bool) -> [Bool] {
     return [carry(bitA, bitB), sum(bitA, bitB)]
 }
 
-func fullAdder(_ bitA: Bool, _ bitB: Bool, _ cIn: Bool) -> [Bool] {
+func fullAdder(_ bitA: Bool, _ bitB: Bool, _ carryIn: Bool) -> [Bool] {
     let halfResult = halfAdder(bitA, bitB)
     let sum1 = halfResult.last!
-    let restResult = halfAdder(cIn, sum1)
+    let restResult = halfAdder(carryIn, sum1)
     let sum = restResult.last!
-    let cOut = or(restResult.first!, halfResult.first!)
+    let carryOut = or(restResult.first!, halfResult.first!)
     
-    return [cOut, sum]
+    return [carryOut, sum]
 }
 
 func byteAdder(_ byteA: [Bool], _ byteB: [Bool]) -> [Bool] {
-    guard byteA.count == byteB.count else { return [] }
-    
     var binary = [Bool]()
     var carry = false
     
-    for i in 0..<byteB.count {
-        let bitA = byteA[i]
-        let bitB = byteB[i]
+    for i in 0..<max(byteA.count, byteB.count) {
+        // LSB -> 배열의 길이가 다를 때 인덱스 접근에 주의해야함(런타임 에러)
+        let bitA = byteA.count > i ? byteA[i] : false
+        let bitB = byteB.count > i ? byteB[i] : false
         let result = fullAdder(bitA, bitB, carry)
         let sum = result.last!
 
